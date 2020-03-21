@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Todo App Using Flask </title>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/app.css')}}"> 
+
+    </head>
+    <body>
+        <div class="container">
+            <h1 class = 'heading'>Todo List</h1>
+            <div class="input"> 
+                <h3 class="new-item">Add a New Item</h3>
+                <form action="{{ url_for('add') }}" method="POST" >
+                    <input type="text" name="todoitem" autocomplete="off">
+                    <input type="submit" value="Add Item"/> 
+                </form>
+            </div>
+            <div class="incomplete-items">
+                <h2>Incomplete-items</h2>
+                <ul>
+                    {% for item in incomplete %}
+                    <li>{{item.text}}
+                    <a class="submit-item" href="{{ url_for('complete' , id=item.id) }}">
+                        <input type="submit" value="Mark as Complete"/> 
+                    </a>
+                    <a class="delete-item" href="{{ url_for('delete' , id=item.id) }}">
+                        <input type="submit" value="Delete Item"/> 
+                    </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="complete-items">
+                <h2>Complete-items</h2>
+                <ul>
+                    {% for item in complete %}
+                    <li>{{item.text}}
+                    <a class="submit-item" href="{{ url_for('incomplete' , id=item.id) }}">
+                        <input type="submit" value="Mark as Incomplete"/> 
+                    </a>
+                    <a class="delete-item" href="{{ url_for('delete' , id=item.id) }}">
+                        <input type="submit" value="Delete Item"/> 
+                    </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+    </body>
+</html>
