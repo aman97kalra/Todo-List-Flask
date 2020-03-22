@@ -9,5 +9,5 @@ A simple todo-list web app created using flask which provides the following func
 The project makes use of Python3, Flask, SQLite, SQLAlchemy, HTML and Css.
 
 ### Note
-You can't deploy to heroku using SQLite database as Heroku's dynos don't have a filesystem that persists across deploys, a file-based database like SQLite3 isn't going to be suitable. It's a great DB for development/quick prototypes, though.Instead of using SQLite on Heroku you can configure your app to run on Postgres.
+- You can't deploy to heroku using SQLite database as Heroku's dynos don't have a filesystem that persists across deploys, a file-based database like SQLite3 isn't going to be suitable. It's a great DB for development/quick prototypes, though.Instead of using SQLite on Heroku you can configure your app to run on Postgres.
 
