@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -18,7 +19,13 @@ class Todo(db.Model):
 def index():
     incomplete=Todo.query.filter_by(complete=False).all()
     complete=Todo.query.filter_by(complete=True).all()
+    print_table_contents()
     return render_template('index.html',complete=complete,incomplete=incomplete)
+
+def print_table_contents():
+    conn = sqlite3.connect('database.db')
+    df = pd.read_sql_query( "SELECT * FROM Todo", conn )
+    df.to_csv('demo.csv')
 
 @app.route('/add',methods=['POST'])
 def add():
