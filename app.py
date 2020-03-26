@@ -2,14 +2,19 @@ from flask import Flask,render_template,request,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 import pandas as pd
+import os
 
 app = Flask(__name__)
 
-## Database Connection
-path='/Users/Aman.Kalra/Desktop/Flask WebApp/database.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+path
-db=SQLAlchemy(app)
+## Database Connection using os Module
+project_dir = os.path.dirname(os.path.abspath(__file__))
+database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
 
+# path='/Users/Aman.Kalra/Desktop/Todo List Flask/database.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+path
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_file
+db=SQLAlchemy(app)
 class Todo(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     text=db.Column(db.String(1000))
